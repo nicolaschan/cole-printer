@@ -56,7 +56,7 @@
 							return [{
 								key: 'Heat Bed Actual',
 								values: bed_actual,
-								color: '#ff4d4d'
+								color: '#0000ff'
 							}, {
 								key: 'Extruder Actual',
 								values: extruder_actual,
@@ -64,11 +64,11 @@
 							}, {
 								key: 'Heat Bed Target',
 								values: bed_target,
-								color: '#0000ff'
+								color: '#aaaaff'
 							}, {
 								key: 'Extruder Target',
 								values: extruder_target,
-								color: '#4d4dff'
+								color: '#ffaaaa'
 							}];
 						};
 						$scope.temperature_data = parseData(data);
