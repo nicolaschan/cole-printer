@@ -32,7 +32,7 @@
 						$scope.printer = data;
 
 						var getLastElements = function(array, number) {
-							if (array.length >= number) {
+							if (array.length <= number) {
 								return array;
 							} else {
 								return array.slice(array.length - number);
@@ -56,7 +56,7 @@
 							return [{
 								key: 'Heat Bed Actual',
 								values: bed_actual,
-								color: '#0000ff'
+								color: '#ff4d4d'
 							}, {
 								key: 'Extruder Actual',
 								values: extruder_actual,
@@ -64,7 +64,7 @@
 							}, {
 								key: 'Heat Bed Target',
 								values: bed_target,
-								color: '#ff4d4d'
+								color: '#0000ff'
 							}, {
 								key: 'Extruder Target',
 								values: extruder_target,
