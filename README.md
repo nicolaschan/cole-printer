@@ -1,2 +1,2 @@
-# cole-printer
-status dashboard for cole's 3D printer
+# Octoprint Dashboard
+dashboard showing the status of an Octoprint printer
