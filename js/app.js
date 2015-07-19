@@ -12,13 +12,17 @@
 			restrict: 'E',
 			templateUrl: 'templates/printer-data.html',
 			controller: function($scope, $http) {
+				var api_url = 'http://emulatron.zapto.org:5000/api';
+				var api_key = '5F99911C5462436E885F6F78BC8484D9';
+
 				$scope.printer = {};
 				$scope.job = {};
 				$scope.temperature_data = [];
+				$scope.connected = true;
 
 				var update = function() {
-					$http.defaults.headers.common['X-Api-Key'] = '5F99911C5462436E885F6F78BC8484D9';
-					$http.get('http://emulatron.zapto.org:5000/api/printer?history=true&limit=8').success(function(data, status) {
+					$http.defaults.headers.common['X-Api-Key'] = api_key;
+					$http.get(api_url + '/printer?history=true&limit=8').success(function(data, status) {
 						$scope.printer = data;
 						var parseData = function(data) {
 							var bed_actual = [];
@@ -47,8 +51,10 @@
 							}];
 						};
 						$scope.temperature_data = parseData(data);
+					}).error(function(data) {
+						$scope.connected = false;
 					});
-					$http.get('http://emulatron.zapto.org:5000/api/job').success(function(data, status) {
+					$http.get(api_url + '/job').success(function(data, status) {
 						$scope.job = data;
 					});
 				};
@@ -80,6 +86,12 @@
 		return {
 			restrict: 'E',
 			templateUrl: 'templates/temperature-alert.html'
+		};
+	});
+	app.directive('connectionAlert', function() {
+		return {
+			restrict: 'E',
+			templateUrl: 'templates/connection-alert.html'
 		};
 	});
 
