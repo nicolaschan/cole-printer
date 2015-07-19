@@ -20,16 +20,26 @@
 				$scope.temperature_data = [];
 				$scope.connected = true;
 
+				var bed_actual = [];
+				var extruder_actual = [];
+				var bed_target = [];
+				var extruder_target = [];
+
 				var update = function() {
 					$http.defaults.headers.common['X-Api-Key'] = api_key;
 					$http.get(api_url + '/printer?history=true&limit=60').success(function(data, status) {
 						$scope.connected = true;
 						$scope.printer = data;
+
+						var getLastElements = function(array, number) {
+							if (array.length >= number) {
+								return array;
+							} else {
+								return array.slice(array.length - number);
+							}
+						};
+
 						var parseData = function(data) {
-							var bed_actual = [];
-							var extruder_actual = [];
-							var bed_target = [];
-							var extruder_target = [];
 							for (var i in data.temperature.history) {
 								var time = data.temperature.history[i].time;
 								bed_actual.push([time, data.temperature.history[i].bed.actual]);
@@ -37,6 +47,12 @@
 								bed_target.push([time, data.temperature.history[i].bed.target]);
 								extruder_target.push([time, data.temperature.history[i].tool0.target]);
 							}
+
+							bed_actual = getLastElements(bed_actual, 20);
+							extruder_actual = getLastElements(extruder_actual, 20);
+							bed_target = getLastElements(bed_target, 20);
+							extruder_target = getLastElements(extruder_target, 20);
+
 							return [{
 								key: 'Heat Bed Actual',
 								values: bed_actual,
