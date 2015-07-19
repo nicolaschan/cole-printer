@@ -1,0 +1,4 @@
+<div class="panel panel-default" ng-class="{ 'panel-success':printer.state.flags.operational, 'panel-warning':printer.state.flags.paused, 'panel-info':printer.state.flags.printing, 'panel-danger':printer.state.flags.error  }">
+	<div class="panel-heading">Printer Status</div>
+	<div class="panel-body"><h1>{{printer.state.text}}</h1></div>
+</div>
