@@ -1,4 +1,5 @@
-<div class="panel panel-default" ng-class="{ 'panel-success':printer.state.flags.operational, 'panel-warning':printer.state.flags.paused, 'panel-info':printer.state.flags.printing, 'panel-danger':printer.state.flags.error  }">
+<div class="panel panel-default" ng-class="{ 'panel-success':printer.state.flags.operational, 'panel-warning':printer.state.flags.paused, 'panel-info':printer.state.flags.printing, 'panel-danger':printer.state.flags.error, 'panel-danger':!connected }">
 	<div class="panel-heading">Printer Status</div>
-	<div class="panel-body"><h1>{{printer.state.text}}</h1></div>
+	<div class="panel-body" ng-show="connected"><h1>{{printer.state.text}}</h1></div>
+	<div class="panel-body" ng-hide="connected"><h1>Offline</h1></div>
 </div>

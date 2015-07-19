@@ -23,6 +23,7 @@
 				var update = function() {
 					$http.defaults.headers.common['X-Api-Key'] = api_key;
 					$http.get(api_url + '/printer?history=true&limit=8').success(function(data, status) {
+						$scope.connected = true;
 						$scope.printer = data;
 						var parseData = function(data) {
 							var bed_actual = [];
@@ -41,13 +42,13 @@
 								values: bed_actual
 							}, {
 								key: 'Extruder Actual',
-								values: bed_actual
+								values: extruder_actual
 							}, {
 								key: 'Heat Bed Target',
-								values: bed_actual
+								values: bed_target
 							}, {
 								key: 'Extruder Target',
-								values: bed_actual
+								values: extruder_target
 							}];
 						};
 						$scope.temperature_data = parseData(data);
@@ -59,7 +60,7 @@
 					});
 				};
 				update();
-				setInterval(update, 1000);
+				setInterval(update, 2000);
 			},
 			controllerAs: 'dataCtrl'
 		};
@@ -100,9 +101,9 @@
 			return new Date(1970, 0, 1).setSeconds(seconds);
 		};
 	});
-	app.filter('flooredPercentToTenth', function() {
-		return function(proportion) {
-			return Math.floor(proportion * 1000) / 10;
+	app.filter('flooredToTenth', function() {
+		return function(percent) {
+			return Math.floor(percent * 10) / 10;
 		};
 	});
 })();

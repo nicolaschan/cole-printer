@@ -1,15 +1,15 @@
 <div class="panel panel-default">
 	<div class="panel-heading">Current Job</div>
-	<div class="panel-body" ng-show="job.job.file.name">
+	<div class="panel-body" ng-hide="job.progress.completion === null">
 		<h1>{{job.job.file.name}}</h1>
 		<div class="progress">
-			<div class="progress-bar" role="progressbar" aria-valuenow="{{job.progress.completion}}" aria-valuemin="0" aria-value-max="100" style="width:{{job.progress.completion * 100}}%">{{job.progress.completion | flooredPercentToTenth}}%</div>
+			<div class="progress-bar" role="progressbar" aria-valuenow="{{job.progress.completion}}" aria-valuemin="0" aria-value-max="100" style="width:{{job.progress.completion}}%">{{job.progress.completion | flooredToTenth}}%</div>
 		</div>
 		<h3><strong>Byte status: </strong>{{job.progress.filepos}} / {{job.job.file.size}}</h3>
 		<h3><strong>Current print time: </strong>{{job.progress.printTime | secondsToTime | date: 'HH:mm:ss'}}</h3>
 		<h3><strong>Est. print time: </strong>{{job.job.estimatedPrintTime | secondsToTime | date: 'HH:mm:ss'}}</h3>
 	</div>
-	<div class="panel-body" ng-hide="job.job.file.name">
-		<h1>Not Printing</h1>
+	<div class="panel-body" ng-show="job.progress.completion === null">
+		<h1>No File Selected</h1>
 	</div>
 </div>
