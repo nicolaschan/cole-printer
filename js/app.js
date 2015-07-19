@@ -22,7 +22,7 @@
 
 				var update = function() {
 					$http.defaults.headers.common['X-Api-Key'] = api_key;
-					$http.get(api_url + '/printer?history=true&limit=8').success(function(data, status) {
+					$http.get(api_url + '/printer?history=true&limit=60').success(function(data, status) {
 						$scope.connected = true;
 						$scope.printer = data;
 						var parseData = function(data) {
@@ -39,16 +39,20 @@
 							}
 							return [{
 								key: 'Heat Bed Actual',
-								values: bed_actual
+								values: bed_actual,
+								color: '#0000ff'
 							}, {
 								key: 'Extruder Actual',
-								values: extruder_actual
+								values: extruder_actual,
+								color: '#ff0000'
 							}, {
 								key: 'Heat Bed Target',
-								values: bed_target
+								values: bed_target,
+								color: '#ff4d4d'
 							}, {
 								key: 'Extruder Target',
-								values: extruder_target
+								values: extruder_target,
+								color: '#4d4dff'
 							}];
 						};
 						$scope.temperature_data = parseData(data);
