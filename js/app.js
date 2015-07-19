@@ -78,9 +78,9 @@
 					$http.get(api_url + 'job').success(function(data, status) {
 						$scope.job = data;
 					});
+					setTimeout(update, 2500);
 				};
 				update();
-				setInterval(update, 2500);
 			},
 			controllerAs: 'dataCtrl'
 		};
