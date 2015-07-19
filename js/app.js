@@ -12,7 +12,7 @@
 			restrict: 'E',
 			templateUrl: 'templates/printer-data.html',
 			controller: function($scope, $http) {
-				var api_url = 'http://emulatron.zapto.org:5000/api';
+				var api_url = 'http://emulatron.zapto.org:5000/api/';
 				var api_key = '5F99911C5462436E885F6F78BC8484D9';
 
 				$scope.printer = {};
@@ -27,7 +27,7 @@
 
 				var update = function() {
 					$http.defaults.headers.common['X-Api-Key'] = api_key;
-					$http.get(api_url + '/printer?history=true&limit=60').success(function(data, status) {
+					$http.get(api_url + 'printer?history=true&limit=60').success(function(data, status) {
 						$scope.connected = true;
 						$scope.printer = data;
 
@@ -75,7 +75,7 @@
 					}).error(function(data) {
 						$scope.connected = false;
 					});
-					$http.get(api_url + '/job').success(function(data, status) {
+					$http.get(api_url + 'job').success(function(data, status) {
 						$scope.job = data;
 					});
 				};
